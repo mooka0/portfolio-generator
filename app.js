@@ -39,10 +39,29 @@ const promptUser = () => {
       }
     },
     {
+      type: 'confirm',
+      name: 'confirmAbout',
+      message: 'Would you like to enter some information about yourself for an "About" section?',
+      default: true,
+    },
+    {
+      type: 'input',
+      name: 'about',
+      message: 'Provide some information about yourself:',
+      when: ({ confirmAbout }) => {
+        if (confirmAbout) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+    {
       type: 'input',
       name: 'about',
       message: 'Provide some information about yourself:',
     },
+    
   ]);
 };
 
@@ -128,24 +147,7 @@ Add a New Project
 };
 
 promptUser (
-  {
-    type: 'confirm',
-    name: 'confirmAbout',
-    message: 'Would you like to enter some information about yourself for an "About" section?',
-    default: true,
-  },
-  {
-    type: 'input',
-    name: 'about',
-    message: 'Provide some information about yourself:',
-    when: ({ confirmAbout }) => {
-      if (confirmAbout) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
+  
 )
   .then(promptProject)
   .then(portfolioData => {
